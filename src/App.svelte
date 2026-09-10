@@ -19,7 +19,7 @@
 </script>
 
 <header class="container d-flex flex-wrap justify-content-between align-items-center gap-3 py-4 mb-4 border-bottom">
-  <h1 class="h2 mb-0">Civic Portal - Applications Office</h1>
+  <h1 class="h2 mb-0">Military Portal - Applications Office</h1>
   {#if me}
     <a href="/logout" class="btn btn-danger">Sign out</a>
   {/if}
