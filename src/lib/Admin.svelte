@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import { api, describeApplication, statusBadgeClass } from './api.js';
 
-  const STATUSES = ['pending', 'approved', 'rejected', 'withdrawn'];
+  const STATUSES = ['pending', 'approved', 'rejected'];
 
   let allApps = [];
   let loading = true;
@@ -34,7 +34,7 @@
   async function apply(amka) {
     saveMessage = { ...saveMessage, [amka]: '' }; // clear save message (so it doesn't save across applications)
     try {
-      await api(`/admin/applications/${amka}`, { method: 'PUT', body: JSON.stringify({ status: pendingStatus[amka] }) });
+      await api(`/admin/applications/${amka}`, { method: 'PUT', bodywithd: JSON.stringify({ status: pendingStatus[amka] }) });
       saveMessage = { ...saveMessage, [amka]: 'Saved.' };
       const app = allApps.find((a) => a.applicant_amka === amka);
       if (app) app.status = pendingStatus[amka];
