@@ -16,7 +16,7 @@
     loading = true;
     loadError = null;
     try {
-      allApps = await api('/admin/applications');
+      allApps = await api('/applications');
       pendingStatus = Object.fromEntries(allApps.map((a) => [a.applicant_amka, a.status]));
     } catch (e) {
       loadError = e.message;
@@ -34,7 +34,7 @@
   async function apply(amka) {
     saveMessage = { ...saveMessage, [amka]: '' }; // clear save message (so it doesn't save across applications)
     try {
-      await api(`/admin/applications/${amka}`, { method: 'PUT', body: JSON.stringify({ status: pendingStatus[amka] }) });
+      await api(`/applications/${amka}`, { method: 'PUT', body: JSON.stringify({ status: pendingStatus[amka] }) });
       saveMessage = { ...saveMessage, [amka]: 'Saved.' };
       const app = allApps.find((a) => a.applicant_amka === amka);
       if (app) app.status = pendingStatus[amka];
@@ -47,7 +47,7 @@
   async function del(amka) {
     if (!confirm(`Delete the application for AMKA ${amka}?`)) return;
     try {
-      await api(`/admin/applications/${amka}`, { method: 'DELETE' });
+      await api(`/applications/${amka}`, { method: 'DELETE' });
       allApps = allApps.filter((a) => a.applicant_amka !== amka);
     } catch (e) {
       alert(e.message);

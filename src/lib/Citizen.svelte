@@ -13,7 +13,7 @@
 
   async function load() {
     try {
-      application = await api('/citizen/application');
+      application = await api('/application');
       showForm = false;
     } catch (e) {
       if (e.status === 404) {
@@ -38,7 +38,7 @@
     }
 
     try {
-      await api('/citizen/application', { method: 'POST', body: JSON.stringify(payload) });
+      await api('/application', { method: 'POST', body: JSON.stringify(payload) });
       await load();
     } catch (e) {
       formError = e.message;

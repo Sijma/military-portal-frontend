@@ -12,7 +12,7 @@
     loading = true;
     loadError = null;
     try {
-      apps = await api(`/officer/applications${filter === 'all' ? '' : '?status=' + filter}`);
+      apps = await api(`/applications${filter === 'all' ? '' : '?status=' + filter}`);
     } catch (e) {
       loadError = e.message;
     }
@@ -23,7 +23,7 @@
 
   async function review(amka, decision) {
     try {
-      await api(`/officer/applications/${amka}/review`, {
+      await api(`/applications/${amka}/review`, {
         method: 'PUT',
         body: JSON.stringify({ decision, note: notes[amka] || null }),
       });
